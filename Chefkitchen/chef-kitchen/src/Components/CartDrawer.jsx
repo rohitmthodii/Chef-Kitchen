@@ -90,7 +90,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart }) => {
                   </div>
 
                   {/* QTY */}
-                  <div className="flex ml-12">
+                  <div className="flex ml-12 md:ml-4">
                     <p className="bg-[#2D303E] px-6 py-3 rounded-lg border border-[#393C49]">
                       {item.quantity}
                     </p>
