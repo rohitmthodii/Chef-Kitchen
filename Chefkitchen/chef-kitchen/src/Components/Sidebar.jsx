@@ -6,6 +6,7 @@ import Favourate from '../assets/Favourateicon.svg'
 import Mail from '../assets/Mailicon.svg'
 import Bell from '../assets/Bellicon.svg'
 import Exit from '../assets/Exiticon.svg'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   
@@ -18,15 +19,15 @@ const Sidebar = () => {
 
         {/* NAVIGATION */}
         <div className="flex flex-col gap-14">
-          <img src={Home} alt="" />
+          <Link><img src={Home} alt="" /></Link>
           
-          <img src={Menu} alt="" />
+          <Link><img src={Menu} alt="" /></Link>
           
-          <img src={Favourate} alt="" />
+          <Link><img src={Favourate} alt="" /></Link>
           
-          <img src={Mail} alt="" />
+          <Link><img src={Mail} alt="" /></Link>
           
-          <img src={Bell} alt="" />
+          <Link><img src={Bell} alt="" /></Link>
         </div>
       </div>
 

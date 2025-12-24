@@ -47,7 +47,6 @@ const Header = ({ isCartOpen, onCartOpen }) => {
 
       {/* TABS  */}
       <div className='flex flex-row gap-12 md:gap-20 pb-2 border-b-2 border-b-slate-500/50 font-semibold truncate'>
-      
         <NavLink to="/menu/today" className={tabClass}>Today Special</NavLink>
 
         <NavLink to="/menu/special" className={tabClass}>Our Specials</NavLink>
