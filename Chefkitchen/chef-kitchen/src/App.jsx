@@ -9,10 +9,8 @@ function App() {
   return (
     <Routes>
 
-      {/* Home */}
       <Route path="/" element={<Home />} />
 
-      {/* Menu Layout */}
       <Route path="/menu" element={<MenuLayout />}>
         <Route index element={<TodaySpecial />} />
         <Route path="today" element={<TodaySpecial />} />

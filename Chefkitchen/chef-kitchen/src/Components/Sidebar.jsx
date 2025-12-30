@@ -19,15 +19,15 @@ const Sidebar = () => {
 
         {/* NAVIGATION */}
         <div className="flex flex-col gap-14">
-          <Link><img src={Home} alt="" /></Link>
+          <Link to='/'><img className='hover:bg-orange-500 hover:text-white current' src={Home} alt="" /></Link>
           
-          <Link><img src={Menu} alt="" /></Link>
+          <Link to='/menu'><img src={Menu} alt="" /></Link>
           
-          <Link><img src={Favourate} alt="" /></Link>
+          <Link to='#'><img src={Favourate} alt="" /></Link>
           
-          <Link><img src={Mail} alt="" /></Link>
+          <Link to='#'><img src={Mail} alt="" /></Link>
           
-          <Link><img src={Bell} alt="" /></Link>
+          <Link to='#'><img src={Bell} alt="" /></Link>
         </div>
       </div>
 
