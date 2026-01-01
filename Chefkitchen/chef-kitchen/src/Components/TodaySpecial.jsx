@@ -10,9 +10,7 @@ const TodaySpecial = () => {
     setSelectedSizes((prev) => {
       const exists = prev.find((item) => item.id === id);
       if (exists) {
-        return prev.map((item) =>
-          item.id === id ? { ...item, size } : item
-        );
+        return prev.map((item) => (item.id === id ? { ...item, size } : item));
       }
       return [...prev, { id, size }];
     });
@@ -29,9 +27,7 @@ const TodaySpecial = () => {
     if (!price) return;
 
     setCart((prev) => {
-      const index = prev.findIndex(
-        (c) => c.id === id && c.size === size
-      );
+      const index = prev.findIndex((c) => c.id === id && c.size === size);
 
       if (index !== -1) {
         return prev.map((c, i) =>
@@ -84,57 +80,49 @@ const TodaySpecial = () => {
               </p>
 
               {/* PRICE */}
-              <div className="mt-2 flex gap-3 items-center justify-center text-sm sm:text-base">
+              <div className="mt-2 flex gap-3 items-center justify-center text-sm sm:text-base truncate">
                 {price.old && (
                   <span className="text-red-500 line-through">
                     $ {price.old}
                   </span>
                 )}
-                <span className="text-green-500">
-                  $ {price.new}
-                </span>
+                <span className="text-green-500">$ {price.new}</span>
               </div>
 
               {/* SIZE BUTTONS */}
               <div className="flex justify-center gap-2 mt-3 md:gap-3">
-  {["small", "medium", "large"].map((size) => (
-    <button
-      key={size}
-      onClick={() => handleSizeChange(item.id, size)}
-      className={`
+                {["small", "medium", "large"].map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => handleSizeChange(item.id, size)}
+                    className={`
         rounded
         text-xs md:text-sm
         px-2 py-1 md:px-3 md:py-2
         ${currentSize === size ? "bg-[#F99147] text-white" : "text-white"}
         transition-colors duration-200
       `}
-    >
-      {size[0].toUpperCase()}
-    </button>
-  ))}
-</div>
-
+                  >
+                    {size[0].toUpperCase()}
+                  </button>
+                ))}
+              </div>
 
               {/* ADD TO CART */}
               <button
-  onClick={() => addToCart(item.id)}
-  className={`mt-3 sm:mt-4
+                onClick={() => addToCart(item.id)}
+                className={`mt-3 sm:mt-4
     w-full sm:w-auto
     px-4 sm:px-6
     py-2
     rounded-lg
     text-xs sm:text-sm md:text-base
-    transition-colors
-    ${
-      isAdded
-        ? "bg-green-600 text-white"
-        : "bg-[#F99147] text-white"
-    }
+    transition-colors truncate
+    ${isAdded ? "bg-green-600 text-white" : "bg-[#F99147] text-white"}
   `}
->
-  {isAdded ? "Added ✔" : "Add to Cart"}
-</button>
-
+              >
+                {isAdded ? "Added ✔" : "Add to Cart"}
+              </button>
             </div>
           );
         })}

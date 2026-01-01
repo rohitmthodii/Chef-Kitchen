@@ -14,7 +14,7 @@ function App() {
       <Route path="/menu" element={<MenuLayout />}>
         <Route index element={<TodaySpecial />} />
         <Route path="today" element={<TodaySpecial />} />
-        <Route path="special" element={<OurSpecial />} />
+        <Route path="our" element={<OurSpecial />} />
         <Route path="south" element={<SouthIndian />} />
       </Route>
 

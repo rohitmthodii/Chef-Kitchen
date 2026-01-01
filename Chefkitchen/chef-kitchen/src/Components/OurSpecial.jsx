@@ -3,8 +3,8 @@ import React from 'react'
 const OurSpecial = () => {
   return (
     <div className='md:ml-[112px] px-2'>
-      <div className=''>
-        <h1>loooooooooooooooooooooo</h1>
+      <div className='font-barlow'>
+        <p className="text-gray-400 font-medium">Currently Unavailable.. 🙁</p>
       </div>
     </div>
   )
