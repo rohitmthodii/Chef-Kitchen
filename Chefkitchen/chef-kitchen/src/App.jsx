@@ -1,9 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
+import MenuLayout from "./Layouts/MenuLayout";
 import TodaySpecial from "./Components/TodaySpecial";
 import OurSpecial from "./Components/OurSpecial";
 import SouthIndian from "./Components/SouthIndian";
-import MenuLayout from "./Layouts/MenuLayout";
+import Favourates from "./Components/Favourates";
+import Mail from "./Components/Mail";
+import Bell from "./Components/Bell";
 
 function App() {
   return (
@@ -17,6 +20,10 @@ function App() {
         <Route path="our" element={<OurSpecial />} />
         <Route path="south" element={<SouthIndian />} />
       </Route>
+
+      <Route path="/favourate" element={<Favourates />}/>
+      <Route path="/mail" element={<Mail />}/>
+      <Route path="/bell" element={<Bell />}/>
 
     </Routes>
   );

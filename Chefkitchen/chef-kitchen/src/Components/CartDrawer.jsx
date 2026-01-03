@@ -1,6 +1,14 @@
 import { Trash2, X } from "lucide-react";
 
-const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
+const CartDrawer = ({
+  isOpen,
+  onClose,
+  cart,
+  setCart,
+  onOrderNow,
+  orderType,
+  setOrderType,
+}) => {
   const sizeLabel = {
     small: "S",
     medium: "M",
@@ -14,7 +22,13 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
 
   const removeItem = (id, size) => {
     setCart((prev) =>
-      prev.filter((item) => !(item.id === id && item.size === size))
+      prev
+        .map((item) =>
+          item.id === id && item.size === size
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
     );
   };
 
@@ -40,9 +54,16 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
           {["Dine In", "Take Away", "Delivery"].map((type) => (
             <button
               key={type}
-              className="text-[#F99147] hover:text-white border border-gray-500/50
-              hover:border-[#EA7C69] px-3 py-1 rounded-lg hover:bg-[#F99147]
-              transition-all text-xs sm:text-sm"
+              onClick={() => setOrderType(type)}
+              className={`
+      px-3 py-1 rounded-lg text-xs sm:text-sm transition-all
+      border
+      ${
+        orderType === type
+          ? "bg-[#F99147] text-white border-[#F99147]"
+          : "text-[#F99147] border-gray-500/50 hover:bg-[#F99147] hover:text-white"
+      }
+    `}
             >
               {type}
             </button>
@@ -51,7 +72,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
 
         <div
           className="grid grid-cols-[1fr_50px_60px]
-          sm:grid-cols-[1fr_80px_80px]
+          sm:grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_20px_80px]
           text-white font-semibold mt-5 pb-4
           border-b border-gray-500/50 text-sm sm:text-base"
         >
@@ -74,11 +95,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
                 key={`${item.id}-${item.size}`}
                 className="flex flex-col gap-3"
               >
-                {/* ITEM ROW */}
-                <div
-                  className="grid grid-cols-[1fr_50px_60px]
-                  sm:grid-cols-[1fr_80px_80px] items-center"
-                >
+                <div className="grid grid-cols-[1fr_50px_60px] items-center">
                   <div className="flex gap-3 min-w-0">
                     <img
                       src={item.image}
@@ -86,14 +103,12 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
                       className="w-10 h-10 sm:w-12 sm:h-12 rounded flex-shrink-0"
                     />
 
-                    <div className="flex flex-col gap-1 min-w-0">
-                      <p className="font-medium truncate">
+                    <div className="flex flex-col min-w-0">
+                      <p className="font-medium truncate max-w-44 sm:max-w-28 md:max-w-44">
                         {item.name}
                       </p>
                       <div className="flex gap-2 text-xs sm:text-sm">
-                        <p className="text-gray-400">
-                          {sizeLabel[item.size]}
-                        </p>
+                        <p className="text-gray-400">{sizeLabel[item.size]}</p>
                         <p className="text-gray-400">$ {item.price}</p>
                       </div>
                     </div>
@@ -102,7 +117,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
                   {/* QTY */}
                   <div className="flex justify-center">
                     <p
-                      className="bg-[#2D303E] px-3 sm:px-5 py-1.5 sm:py-2
+                      className="bg-[#2D303E] px-5 py-3
                       rounded-lg border border-[#393C49] text-sm"
                     >
                       {item.quantity}
@@ -118,17 +133,16 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
                 {/* NOTE + DELETE */}
                 <div className="flex gap-2 items-center">
                   <input
-                    className="flex-1 h-11 sm:h-14 rounded-xl pl-4
+                    className="flex-1 h-12 rounded-xl pl-4
                     bg-[#2D303E] text-white placeholder-gray-400 outline-none
                     border border-[#393C49] text-sm"
                     type="text"
-                    placeholder="Please, just a little bit spicy only."
+                    placeholder="Order Note..."
                   />
 
                   <button
                     onClick={() => removeItem(item.id, item.size)}
-                    className="text-red-500 hover:text-red-600
-                    p-3 bg-[#2D303E] rounded-xl"
+                    className="text-[#F99147] hover:text-[#FF7CA3] border border-[#F99147] hover:border-[#FF7CA3] px-4 h-12 rounded-xl transition-all"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -156,14 +170,13 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart, onOrderNow }) => {
           </div>
 
           <button
-  onClick={onOrderNow}
-  className="mt-4 w-full bg-[#F99147]
-  py-2 rounded-lg font-medium
-  hover:bg-[#f77b22] transition-all"
->
-  Order Now
-</button>
-
+            onClick={onOrderNow}
+            className="mt-4 w-full bg-[#F99147]
+            py-2 rounded-lg font-medium
+            hover:bg-[#f77b22] transition-all"
+          >
+            Order Now
+          </button>
         </div>
       )}
     </div>

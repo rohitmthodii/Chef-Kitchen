@@ -3,7 +3,7 @@ import { menuData } from "../Constants";
 import { useOutletContext } from "react-router-dom";
 
 const TodaySpecial = () => {
-  const { cart, setCart } = useOutletContext();
+  const { cart, setCart, searchQuery } = useOutletContext();
   const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleSizeChange = (id, size) => {
@@ -49,11 +49,15 @@ const TodaySpecial = () => {
     });
   };
 
+  const filteredMenu = menuData.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="px-3 sm:px-4 md:ml-[112px] md:px-1  font-barlow pb-10">
+    <div className="px-3 sm:px-4 md:ml-[112px] md:px-1 font-barlow pb-10">
       {/* GRID */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10">
-        {menuData.map((item) => {
+        {filteredMenu.map((item) => {
           const currentSize =
             selectedSizes.find((s) => s.id === item.id)?.size || "small";
 
@@ -75,7 +79,7 @@ const TodaySpecial = () => {
                 className="w-24 sm:w-28 md:w-32 mx-auto -mt-16 sm:-mt-20"
               />
 
-              <p className="text-white mt-4 text-xs sm:text-base">
+              <p className="text-white mt-4 text-xs sm:text-base whitespace-normal md:truncate">
                 {item.name}
               </p>
 
@@ -111,15 +115,12 @@ const TodaySpecial = () => {
               {/* ADD TO CART */}
               <button
                 onClick={() => addToCart(item.id)}
-                className={`mt-3 sm:mt-4
-    w-full sm:w-auto
-    px-4 sm:px-6
-    py-2
-    rounded-lg
-    text-xs sm:text-sm md:text-base
-    transition-colors truncate
-    ${isAdded ? "bg-green-600 text-white" : "bg-[#F99147] text-white"}
-  `}
+                className={`mt-3 sm:mt-4 w-fit sm:w-auto px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm md:text-base transition-colors truncate
+                ${
+                  isAdded
+                    ? "bg-green-600 text-white"
+                    : "bg-[#F99147] text-white"
+                }`}
               >
                 {isAdded ? "Added ✔" : "Add to Cart"}
               </button>
